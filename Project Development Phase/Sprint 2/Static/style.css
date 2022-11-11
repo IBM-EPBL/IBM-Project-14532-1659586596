@@ -1,134 +1,152 @@
-<<<<<<< HEAD
-from flask import Flask,redirect,url_for,render_template,request,make_response
-import ibm_db
+* {
+    font-family: 'Alegreya', serif !important;
+}
 
-conn = ibm_db.connect("DATABASE=bludb;HOSTNAME=764264db-9824-4b7c-82df-40d1b13897c2.bs2io90l08kqb1od8lcg.databases.appdomain.cloud;PORT=32536;SECURITY=SSL;SSLServerCertificate=abc.crt;UID=gnq12618;PWD=0glS4tFaR2ciK8fB",'','')
-print(conn)
-print("connection successful...")
-app = Flask(__name__)
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
 
+ }
 
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
 
+ }
 
-@app.route('/home')
-def home():
-    return render_template("home.html")
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    .navbar {
+        padding-top:15px;
+        padding-bottom:15px;
+        background-color: white;
+    }
+    .navbar-brand{
+        padding-left: 5px;
+    }
+    .navbar-nav {
+        margin-left: 30px;  
+    }
+    .nav-item {
+        padding-left:5px;
+    }
+    .donate-sponsor{
+        margin-right:10px;
+    }
+    #donate,#sponsor{
+        margin:5px;
+        padding: 5px 15px 5px 15px;
+    }
+    .homepage-header{
+        background: url('../img/group.JPG');
+        background-size: cover;
+        background-position: center top;
+        padding: 0;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        height: 85vh;
+    }
+    .home-for-children {
+        background-color: #ffeeba;
+        margin-top:0px;
+        padding-top:10px;
+        padding-bottom:30px;
+    }
+    .home-for-children h2 {
+        line-height: 2.5rem !important;
+        letter-spacing: 3px;
+        font-weight: 600;
+    }
+    .home-for-children h5 {
+        line-height: 1.8rem;
+    }
+    .home-for-children .btn-success {
+        padding: 8px 25px;
+        font-size: large;
+    }
+    /* our focus */
+    .our-focus .container {
+        margin-top:3rem !important;
+    }
 
-@app.route('/login',methods=['POST','GET'])
-def login():
-    if request.method=='POST':
-        username = request.form['username']
-        password = request.form['password']
-        sql = "select * from user where username=? and password=?"
-        stmt = ibm_db.prepare(conn,sql)
-        ibm_db.bind_param(stmt,1,username)
-        ibm_db.bind_param(stmt, 2, password)
-        ibm_db.execute(stmt)
-        dic = ibm_db.fetch_assoc(stmt)
-        print(dic)
-        if dic:
-            return redirect(url_for('home'))
-        else:
-            return redirect(url_for('login'))
-        return redirect(url_for('home'))
-    elif request.method=='GET':
-        return render_template('login.html')
+    .our-focus .row{
+        margin-top:1.5rem !important;
+    }
+    .our-focus .card {
+        border: none !important;
+    }
+    .our-focus #focus-first {
+        margin-right:80px;
+    }
+    .our-focus #focus-second {
+        margin-right:90px;
+    }
+    /* media */
+    .media .container{
+        margin-top: 3rem !important;
+    }
+    .media .row{
+        margin-top: 1.5rem !important;
+    }
+    /* footer */
+    .row-initiative {
+        margin-top:10px
+    }
+    .site-footer {
+        margin-top:30px;
+        line-height:24px;
+    }
+    .footer-links {
+        padding-left:0;
+        list-style: none;
+    }
+    .footer-links li {
+        display: block;
+    }
+    .footer-links.inline li {
+        display: inline-block;
+    }
+    .footer-links li a{
+        color: black;
+    }
+    .footer-logo img{
+        width: 100px;
+    }
+    .social-icons {
+        text-align: right;
+        margin-left:50px;
+    }
+    .social-icons li{
+        list-style: none;
+        display: inline-block;
+    }
+    .social-icons li a {
+        border-radius: 50%;
+        margin-left:10px;
+    }
+    input {
+        padding:10px 20px;
+      }
+      #button {
+        border:none;
+        padding:10px 20px;
+        border-radius:10px;
+        animation:pulse 3s infinite ease-out;
+      }
+ }
 
-@app.route('/signup',methods=['POST','GET'])
-def signup():
-    if request.method=='POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        roll_no = request.form['roll_no']
-        sex = request.form['sex']
-        age = request.form['age']
-        address = request.form['address']
-        blood_group = request.form['blood_group']
-        sql = "insert into user values(?,?,?,?,?,?,?,?,?)"
-        prep_stmt = ibm_db.prepare(conn,sql)
-        ibm_db.bind_param(prep_stmt,1,username)
-        ibm_db.bind_param(prep_stmt,2,email)
-        ibm_db.bind_param(prep_stmt,3,password)
-        ibm_db.bind_param(prep_stmt,4,roll_no)
-        ibm_db.bind_param(prep_stmt,5,sex)
-        ibm_db.bind_param(prep_stmt,6, age)
-        ibm_db.bind_param(prep_stmt,7, "USER")
-        ibm_db.bind_param(prep_stmt,8, address)
-        ibm_db.bind_param(prep_stmt,9, blood_group)
-        ibm_db.execute(prep_stmt)
-        #db post operation
-        return redirect(url_for('login'))
-    elif request.method=='GET':
-        return render_template('signup.html')
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+    .navbar-brand{
+        padding-left: 10px;
+    }
+ }
 
-
-if __name__=='__main__':
-=======
-from flask import Flask,redirect,url_for,render_template,request,make_response
-import ibm_db
-
-conn = ibm_db.connect("DATABASE=bludb;HOSTNAME=764264db-9824-4b7c-82df-40d1b13897c2.bs2io90l08kqb1od8lcg.databases.appdomain.cloud;PORT=32536;SECURITY=SSL;SSLServerCertificate=abc.crt;UID=gnq12618;PWD=0glS4tFaR2ciK8fB",'','')
-print(conn)
-print("connection successful...")
-app = Flask(__name__)
-
-
-
-
-@app.route('/home')
-def home():
-    return render_template("home.html")
-
-@app.route('/login',methods=['POST','GET'])
-def login():
-    if request.method=='POST':
-        username = request.form['username']
-        password = request.form['password']
-        sql = "select * from user where username=? and password=?"
-        stmt = ibm_db.prepare(conn,sql)
-        ibm_db.bind_param(stmt,1,username)
-        ibm_db.bind_param(stmt, 2, password)
-        ibm_db.execute(stmt)
-        dic = ibm_db.fetch_assoc(stmt)
-        print(dic)
-        if dic:
-            return redirect(url_for('home'))
-        else:
-            return redirect(url_for('login'))
-        return redirect(url_for('home'))
-    elif request.method=='GET':
-        return render_template('login.html')
-
-@app.route('/signup',methods=['POST','GET'])
-def signup():
-    if request.method=='POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        roll_no = request.form['roll_no']
-        sex = request.form['sex']
-        age = request.form['age']
-        address = request.form['address']
-        blood_group = request.form['blood_group']
-        sql = "insert into user values(?,?,?,?,?,?,?,?,?)"
-        prep_stmt = ibm_db.prepare(conn,sql)
-        ibm_db.bind_param(prep_stmt,1,username)
-        ibm_db.bind_param(prep_stmt,2,email)
-        ibm_db.bind_param(prep_stmt,3,password)
-        ibm_db.bind_param(prep_stmt,4,roll_no)
-        ibm_db.bind_param(prep_stmt,5,sex)
-        ibm_db.bind_param(prep_stmt,6, age)
-        ibm_db.bind_param(prep_stmt,7, "USER")
-        ibm_db.bind_param(prep_stmt,8, address)
-        ibm_db.bind_param(prep_stmt,9, blood_group)
-        ibm_db.execute(prep_stmt)
-        #db post operation
-        return redirect(url_for('login'))
-    elif request.method=='GET':
-        return render_template('signup.html')
-
-
-if __name__=='__main__':
->>>>>>> f7575a599e8f64dd620a02c88ed095e491194af1
-    app.run(debug = True)
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) { 
+    .navbar-brand{
+        padding-left: 15px;
+    }
+ }
